@@ -5,13 +5,13 @@ This repo consists of my effort on making a simulation of the NSE MTBT CM Feed b
 Simulate the NSE CM Realtime MTBT Feed, capture the feed, analyze trends using LLMs and automate buy, sell or hold orders.
 
 Aim: To improve my skills in 
-Low-latency, High performance programming
-Lock free processing
-Parallelism and Concurrency (Multithreading)
-Clean Code
-Usage of GenAI / LLMs/ Prompt Engineering
-Capital  Markets Domain Knowledge
-Memory Safety
+- Low-latency, High performance programming
+- Lock free processing
+- Parallelism and Concurrency (Multithreading)
+- Clean Code
+- Usage of GenAI / LLMs/ Prompt Engineering
+- Capital  Markets Domain Knowledge
+- Memory Safety
 
 I will be mentioning what I do for each of the skill points mentioned above.
 
