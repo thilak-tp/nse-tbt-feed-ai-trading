@@ -16,3 +16,4 @@ Aim: To improve my skills in
 I will be mentioning what I do for each of the skill points mentioned above.
 
 ## Basic Architecture:
+![screenshot](resources/basic-architecture.png)
