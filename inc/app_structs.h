@@ -7,7 +7,7 @@ struct StreamHeader {
   int16_t streamID;   //This identifies a particular stream
   int32_t sequenceNo; //This is the seq. no. of a packet for a particular stream ID
 
-} 
+}; 
 
 struct OrderMessage {
   
@@ -19,7 +19,7 @@ struct OrderMessage {
   int price;         //Price of the order (In Paise):To be divided by 100 for Rupee
   int quantity;      //Quantity of the order
 
-}
+};
 
 struct TradeMessage {
   
@@ -31,6 +31,6 @@ struct TradeMessage {
   int tradePrice;    //Trade Price (In Paise):To be divided by 100 for Rupee
   int tradeQuantity; //Quantity of the order
   
-}
+};
 
 #pragma pack(pop)
