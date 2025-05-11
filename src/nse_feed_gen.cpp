@@ -20,12 +20,17 @@ int main() {
    
   // Config Initialization
   ConfigParser config;
-  if(!config.load("multicast_config.cfg")) {
+  if(!config.load("app_config.cfg")) {
     logger.warning("The environment script is not sourced");
     return FAILURE;
   }
 
-   
+  std::string debugValue = config.getValue("DEBUG_MODE"); 
+
+  if(debugValue == "1")
+    logger.enableDebug(true);
+  else
+    logger.enableDebug(false);
   logger.info("Inisde the main function");
   logger.debug("The value for the key MC_IP is {}", config.getValue("MC_IP"));
   logger.debug("The value for the key MC_PORT is {}", config.getValue("MC_PORT"));

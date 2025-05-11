@@ -128,6 +128,9 @@ public:
             fileStream.close();
         }
     }
+    void enableDebug(bool enabled) {
+      minLevel = enabled ? LogLevel::DEBUG : LogLevel::INFO;
+    }
 
     // Variadic log method with formatting (C++20 std::format)
     template<typename... Args>
