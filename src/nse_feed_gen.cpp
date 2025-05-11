@@ -25,10 +25,10 @@ int main() {
     return FAILURE;
   }
 
-  
+   
   logger.info("Inisde the main function");
-  std::cout<<"In the main function"<<std::endl;
-  std::cout<<"The value for the key MC_IP is "<<config.getValue("MC_IP");
-  std::cout<<"The value for the key MC_PORT is "<<config.getValue("MC_PORT");
+  logger.debug("The value for the key MC_IP is {}", config.getValue("MC_IP"));
+  logger.debug("The value for the key MC_PORT is {}", config.getValue("MC_PORT"));
+
   return 0;
 }
