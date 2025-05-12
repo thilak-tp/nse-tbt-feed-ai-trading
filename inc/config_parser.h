@@ -1,3 +1,5 @@
+// This header contains a config parser class to deal with simple config parsing
+
 //Implicit Header files
 #include<unordered_map>
 #include<fstream>
@@ -59,7 +61,8 @@ class ConfigParser {
     
     return true;
   }
-
+  
+  // A function to get the stored value when passing a key
   std::string getValue(std::string key)
   {
     return config[key];

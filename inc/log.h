@@ -1,110 +1,14 @@
+// A header to implement application logging which include log levels and also includes taking arguements
+
 // Implicit headerfiles
-/*#include<fstream>
-#include<ctime>
-#include<string>
-#ifndef LOGGER_H
-#define LOGGER_H
-
-#include<sstream>
-#include<iostream>
-*/
-#define LOG_FILE_START "log_"
-
-/*
-// Different log level identifiers
-enum class LogLevel{
-  DEBUG,
-  INFO,
-  WARNING,
-  ERROR
-};
-
-
-class Logger {
-
-  public:
-
-  Logger(LogLevel level = LogLevel::INFO, const std::string& filename = "")
-  : minLevel(level)
-  {
-    if(!filename.empty()) {
-      fileStream.open(filename, std::ios::app);
-    }
-  
-  }
-
-  ~ Logger() {
-    if(!fileStream.is_open()) fileStream.close();  
-  }
-  
-  void log(LogLevel level, const std::string& msg){
-    if(level < minLevel) return;
-    
-    std::string output = format(level, msg);
-    std::cout << output;
-  
-    if(fileStream.is_open()) {
-      fileStream << output;
-    }
-  }
-    
-  void info(const std::string &msg) {log(LogLevel::INFO,msg); }  
-  void debug(const std::string &msg) {log(LogLevel::DEBUG,msg); }  
-  void warning(const std::string &msg) {log(LogLevel::WARNING,msg); }  
-  void error(const std::string &msg) {log(LogLevel::ERROR,msg); }  
-
-  private:
-
-  LogLevel minLevel;
-  
-  std::ofstream fileStream;
-
-  std::string format(LogLevel level, const std::string& msg){
-    
-    std::ostringstream oss;
-    oss << "[" <<currentTime() << "] ";
-    oss << "[" <<levelToString(level) << "] ";
-    oss << msg << "\n";
-    
-    return oss.str();
-
-  }  
-
-  std::string currentTime() {
-    
-    std::time_t now = std::time(nullptr);
-    char buff[20];
-    strftime(buff, sizeof(buff), "%d-%m-%Y %H:%M:%S",std::localtime(&now));
-
-    return buff;
-  }
- 
- std::string currentDate() {
-    
-    std::time_t now = std::time(nullptr);
-    char buff[20];
-    strftime(buff, sizeof(buff), "%d%m%Y",std::localtime(&now));
-
-    return buff;
-  }
-  std::string levelToString(LogLevel level) {
-    switch(level) {
-      case LogLevel::DEBUG: return "DEBG";
-      case LogLevel::INFO: return "INFO";
-      case LogLevel::WARNING: return "WARN";
-      case LogLevel::ERROR: return "ERRO";
-      
-    }
-    return "UNKNOWN";
-  }
-
-};*/
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include <string>
 #include <format>
 #include <ctime>
+
+#define LOG_FILE_START "log_"
 
 enum class LogLevel {
     DEBUG,
@@ -114,7 +18,7 @@ enum class LogLevel {
 };
 
 class Logger {
-public:
+  public:
     Logger(LogLevel level = LogLevel::INFO, const std::string& filename = "")
         : minLevel(level)
     {
@@ -128,11 +32,13 @@ public:
             fileStream.close();
         }
     }
+
+    // A funtion to enable or disable debug mode
     void enableDebug(bool enabled) {
       minLevel = enabled ? LogLevel::DEBUG : LogLevel::INFO;
     }
 
-    // Variadic log method with formatting (C++20 std::format)
+    // A log function that takes arguements as well
     template<typename... Args>
     void log(LogLevel level, std::format_string<Args...> fmt, Args&&... args) {
         if (level < minLevel) return;
@@ -171,6 +77,8 @@ private:
     LogLevel minLevel;
     std::ofstream fileStream;
 
+    // To add current time and log level to each log string
+    // TODO to add microsecond level logging
     std::string format(LogLevel level, const std::string& msg) {
         std::ostringstream oss;
         oss << "[" << currentTime() << "] ";
@@ -179,13 +87,15 @@ private:
         return oss.str();
     }
 
+    // A function to get the current timestamp
     std::string currentTime() {
         std::time_t now = std::time(nullptr);
         char buff[20];
         std::strftime(buff, sizeof(buff), "%d-%m-%Y %H:%M:%S", std::localtime(&now));
         return buff;
     }
-
+    
+    // A function to map each log level to a string so we can use it in the log strings while writing log
     std::string levelToString(LogLevel level) {
         switch (level) {
             case LogLevel::DEBUG: return "DEBG";
@@ -197,4 +107,3 @@ private:
     }
 };
 
-//#endif

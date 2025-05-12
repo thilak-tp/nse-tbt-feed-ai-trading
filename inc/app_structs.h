@@ -1,3 +1,4 @@
+//This header contains the commonly used structures in the program
 #pragma pack(push, 1)
 
 // Structure for NSE CM Feed Header
@@ -9,6 +10,7 @@ struct StreamHeader {
 
 }; 
 
+// Structure for NSE CM Order Message
 struct OrderMessage {
   
   char msgType;      //'N':New Order, 'M':Order Modification, 'X':Order Cancelled
@@ -21,6 +23,7 @@ struct OrderMessage {
 
 };
 
+// Structure for NSE CM Trade Message
 struct TradeMessage {
   
   char msgType;      //'N':New Order, 'M':Order Modification, 'X':Order Cancelled
