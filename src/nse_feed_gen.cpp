@@ -8,6 +8,7 @@
 #include "app_defs.h"
 #include "log.h"
 #include "common.h"
+#include "multicast.h"
 
 int main() {
 
@@ -34,10 +35,17 @@ int main() {
     logger.enableDebug(true);
   else
     logger.enableDebug(false);
+  
+  std::string mutlicastGroup = config.getValue("MC_IP");
+  int port = std::stoi(config.getValue("MC_PORT"));
 
   logger.info("Inisde the main function");
   logger.debug("The value for the key MC_IP is {}", config.getValue("MC_IP"));
   logger.debug("The value for the key MC_PORT is {}", config.getValue("MC_PORT"));
-
+  
+  // Setting up multicast
+  int sock = setupMulticastSender(mutlicastGroup, port); 
+  if(sock == -1)
+    logger.error("Multicast setup failed.");
   return 0;
 }
