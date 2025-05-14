@@ -9,7 +9,7 @@
 #include "log.h"
 #include "common.h"
 #include "multicast.h"
-
+#include "simulate_mtbt_values.h"
 int main() {
 
   // Log Initialization
@@ -45,7 +45,29 @@ int main() {
   
   // Setting up multicast
   int sock = setupMulticastSender(mutlicastGroup, port); 
-  if(sock == -1)
+  if(sock == -1) {
     logger.error("Multicast setup failed.");
-  return 0;
+    return FAILURE;
+  }
+
+  int sequenceNumber = 1;
+  while(true) {
+   
+    if(sequenceNumber % 3 != 0) 
+    {
+      OrderMessage msg;
+      SimulateMTBTValues simMTBTOrd;
+      simMTBTOrd.populateOrderMessage(&msg, sequenceNumber); 
+      simMTBTOrd.displayOrderMessage(&msg); 
+    } 
+    else
+    {
+      TradeMessage msg;
+      SimulateMTBTValues simMTBTTrd;
+      simMTBTTrd.populateTradeMessage(&msg, sequenceNumber); 
+      simMTBTTrd.displayTradeMessage(&msg); 
+    }
+    break;
+  } 
+  return SUCCESS;
 }

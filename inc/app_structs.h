@@ -1,5 +1,5 @@
 //This header contains the commonly used structures in the program
-#pragma pack(push, 1)
+#pragma once
 
 // Structure for NSE CM Feed Header
 struct StreamHeader {
@@ -36,4 +36,4 @@ struct TradeMessage {
   
 };
 
-#pragma pack(pop)
+#pragma once
