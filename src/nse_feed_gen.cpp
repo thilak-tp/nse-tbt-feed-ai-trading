@@ -1,7 +1,9 @@
 // Implicit header files
 #include <iostream>
+#include <cstring>
 #include <string>
-
+#include <unistd.h>
+#include <thread>
 // Explicit header files
 #include "app_structs.h"
 #include "config_parser.h"
@@ -17,11 +19,12 @@ int main() {
   if(logDir.empty()) {
     std::cout<<"Unable to get the Log directory! Kindly source the enviroment script"<<std::endl;
   }
-
+  //Logger logger;
   // Populating the current log file path along with its naming convention
   std::string logfilePath = logDir + "/log_" + getCurrentDate() + ".log";
   Logger logger(LogLevel::DEBUG, logfilePath);
-   
+  //Logger::setGlobalLogLevel(LogLevel::DEBUG);
+  //Logger::setGlobalFilename(logfilePath);   
   // Config Initialization
   ConfigParser config;
   if(!config.load("app_config.cfg")) {
@@ -36,7 +39,7 @@ int main() {
   else
     logger.enableDebug(false);
   
-  std::string mutlicastGroup = config.getValue("MC_IP");
+  std::string multicastGroup = config.getValue("MC_IP");
   int port = std::stoi(config.getValue("MC_PORT"));
 
   logger.info("Inisde the main function");
@@ -44,7 +47,7 @@ int main() {
   logger.debug("The value for the key MC_PORT is {}", config.getValue("MC_PORT"));
   
   // Setting up multicast
-  int sock = setupMulticastSender(mutlicastGroup, port); 
+  int sock = setupMulticastSender(multicastGroup, port); 
   if(sock == -1) {
     logger.error("Multicast setup failed.");
     return FAILURE;
@@ -59,6 +62,19 @@ int main() {
       SimulateMTBTValues simMTBTOrd;
       simMTBTOrd.populateOrderMessage(&msg, sequenceNumber); 
       simMTBTOrd.displayOrderMessage(&msg); 
+      
+      StreamHeader header;
+      header.msgLen = sizeof(StreamHeader) + sizeof(OrderMessage);
+      header.streamID = 1;
+      header.sequenceNo = sequenceNumber++;
+            
+      // Create packet buffer
+      char packet[sizeof(StreamHeader) + sizeof(OrderMessage)];
+      memcpy(packet, &header, sizeof(StreamHeader));
+      memcpy(packet + sizeof(StreamHeader), &msg, sizeof(OrderMessage));
+            
+      sendPacket(sock, multicastGroup, port, packet, sizeof(packet));
+      //logger.info("Order | Multicast Sent for Sequence No. {}", sequenceNumber);        
     } 
     else
     {
@@ -66,8 +82,24 @@ int main() {
       SimulateMTBTValues simMTBTTrd;
       simMTBTTrd.populateTradeMessage(&msg, sequenceNumber); 
       simMTBTTrd.displayTradeMessage(&msg); 
+      
+      StreamHeader header;
+      header.msgLen = sizeof(StreamHeader) + sizeof(TradeMessage);
+      header.streamID = 1;
+      header.sequenceNo = sequenceNumber++;
+            
+      // Create packet buffer
+      char packet[sizeof(StreamHeader) + sizeof(TradeMessage)];
+      memcpy(packet, &header, sizeof(StreamHeader));
+      memcpy(packet + sizeof(StreamHeader), &msg, sizeof(TradeMessage));
+            
+      sendPacket(sock, multicastGroup, port, packet, sizeof(packet));
+      //logger.info("Trade | Multicast Sent for Sequence No. {}", sequenceNumber); 
     }
-    break;
+  
+    // Sleep for a bit to simulate realistic feed
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
   } 
+  close(sock); 
   return SUCCESS;
 }

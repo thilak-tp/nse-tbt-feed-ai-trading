@@ -19,19 +19,35 @@ enum class LogLevel {
 
 class Logger {
   public:
-    Logger(LogLevel level = LogLevel::INFO, const std::string& filename = ""): minLevel(level) 
+   /* Logger(LogLevel level = LogLevel::INFO, const std::string& filename = ""): minLevel(level) 
      
     {
         if (!filename.empty()) {
             fileStream.open(filename, std::ios::app);
         }
     }
+*/
+      Logger()
+      {
+
+      }
+      Logger(LogLevel level, const std::string& filename)
+      : minLevel(level)
+      {
+        std::string fileToOpen = filename.empty() ? defaultFilename : filename;
+        if (!fileToOpen.empty()) {
+          fileStream.open(fileToOpen, std::ios::app);
+        }
+      }
 
     ~Logger() {
         if (fileStream.is_open()) {
             fileStream.close();
         }
     }
+    
+    static void setGlobalLogLevel(LogLevel level);
+    static void setGlobalFilename(const std::string& filename);
 
     // A funtion to enable or disable debug mode
     void enableDebug(bool enabled) {
@@ -75,6 +91,10 @@ class Logger {
 
 
 private:
+    
+    static LogLevel defaultLevel;
+    static std::string defaultFilename;
+    
     LogLevel minLevel;
     std::ofstream fileStream;
     // To add current time and log level to each log string

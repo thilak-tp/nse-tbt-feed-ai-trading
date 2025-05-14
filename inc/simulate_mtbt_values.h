@@ -18,12 +18,13 @@ class SimulateMTBTValues {
   
   public:
 
+  SimulateMTBTValues();
   int getTokenDist();
   int getPriceDist();
   int getQtyDist();
   char getRandomizedOrderType();
   char getRandomizedMsgType();
-
+  long getCurrentTimestamp();
   void populateOrderMessage(OrderMessage *msg, int seqNo);
   void populateTradeMessage(TradeMessage *msg, int seqNo);
   void displayOrderMessage(OrderMessage *msg);
@@ -32,10 +33,10 @@ class SimulateMTBTValues {
   private:
   
   std::random_device rd;
-  std::mt19937 gen(rd());
-  std::uniform_int_distribution<> tokenDist(1000, 1100);
-  std::uniform_int_distribution<> priceDist(10000, 20000);
-  std::uniform_int_distribution<> qtyDist(1, 100);
-  std::uniform_real_distribution<> msgTypeDis(0.0, 1.0);
+  std::mt19937 gen;
+  std::uniform_int_distribution<> tokenDist;
+  std::uniform_int_distribution<> priceDist;
+  std::uniform_int_distribution<> qtyDist;
+  std::uniform_real_distribution<> msgTypeDis;
  
 };

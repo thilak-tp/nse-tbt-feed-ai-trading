@@ -1,4 +1,5 @@
 //This header contains the commonly used structures in the program
+#include<cstdint>
 #pragma once
 
 // Structure for NSE CM Feed Header

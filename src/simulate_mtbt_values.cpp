@@ -1,31 +1,35 @@
 #include "simulate_mtbt_values.h"
+#include<random>
+#include <chrono>
+#include "log.h"
 
   
+SimulateMTBTValues::SimulateMTBTValues() : gen(rd()), priceDist(10000, 20000), qtyDist(1, 100), tokenDist(1000, 1100), msgTypeDis(0.0, 1.0) {} 
 
-int SimuluteMTBTValues::getTokenDist()
+int SimulateMTBTValues::getTokenDist()
 {
   return tokenDist(gen); 
 }
 
-int SimuluteMTBTValues::getPriceDist()
+int SimulateMTBTValues::getPriceDist()
 {
   return priceDist(gen);
 }
 
-int SimuluteMTBTValues::getQtyDist()
+int SimulateMTBTValues::getQtyDist()
 {
   return qtyDist(gen);
 }
 
-long getCurrentTimestamp() {
+long SimulateMTBTValues::getCurrentTimestamp() {
     return std::chrono::duration_cast<std::chrono::milliseconds>(
         std::chrono::system_clock::now().time_since_epoch()).count();
 }
 
 // Probalistically generate message type to simulate realworld scenerio
-char getRandomizedMsgType()
+char SimulateMTBTValues::getRandomizedMsgType()
 {
-  double r = dis(gen);
+  double r = msgTypeDis(gen);
   
   if(r < MAX_NEW_ORDER_PROB) {
     return 'N';
@@ -38,9 +42,9 @@ char getRandomizedMsgType()
 }
 
 // Probalistically generate order type to simulate realworld scenerio
-char getRandomizedOrderType()
+char SimulateMTBTValues::getRandomizedOrderType()
 {
-  double r = dis(gen);
+  double r = msgTypeDis(gen);
   
   if(r < MAX_BUY_PROB) {
     return 'B';
@@ -54,10 +58,10 @@ void SimulateMTBTValues::populateOrderMessage(OrderMessage *msg, int seqNo)
     msg->msgType = getRandomizedMsgType();
     msg->timestamp = getCurrentTimestamp();
     msg->orderID = AVG_ORDERID_DIGITS + seqNo;
-    msg->tokenID = getTokenDist(gen);
+    msg->tokenID = getTokenDist();
     msg->orderType = getRandomizedOrderType();
-    msg->price = getPriceDist(gen);
-    msg->quantity = getQtyDist(gen); 
+    msg->price = getPriceDist();
+    msg->quantity = getQtyDist(); 
 }
 
 void SimulateMTBTValues::populateTradeMessage(TradeMessage *msg, int seqNo)
@@ -66,21 +70,23 @@ void SimulateMTBTValues::populateTradeMessage(TradeMessage *msg, int seqNo)
     msg->timestamp = getCurrentTimestamp();
     msg->buyOrderID = AVG_ORDERID_DIGITS + seqNo - 1;
     msg->sellOrderID = AVG_ORDERID_DIGITS + seqNo - 2;
-    msg->tokenID = getTokenDist(gen);
-    msg->tradePrice = getPriceDist(gen);
-    msg->tradeQuantity = getQtyDist(gen); 
+    msg->tokenID = getTokenDist();
+    msg->tradePrice = getPriceDist();
+    msg->tradeQuantity = getQtyDist(); 
 }
 
-void displayOrderMessage(OrderMessage &msg)
+void SimulateMTBTValues::displayOrderMessage(OrderMessage *msg)
 {
-  logger.info("ORDER | {} | {} | {} | {} | {} | {} | {} | {} |",
+  Logger logger;
+  logger.info("ORDER | {} | {} | {} | {} | {} | {} | {} |",
     msg->msgType, msg->timestamp, msg->orderID, msg->tokenID, msg->orderType,
     msg->price, msg->quantity);
 }
 
-void displayTradeMessage(OrderMessage &msg)
+void SimulateMTBTValues::displayTradeMessage(TradeMessage *msg)
 {
-  logger.info("TRADE | {} | {} | {} | {} | {} | {} | {} | {} |", 
+  Logger logger;
+  logger.info("TRADE | {} | {} | {} | {} | {} | {} | {} |", 
     msg->msgType, msg->timestamp, msg->buyOrderID, msg->sellOrderID, msg->tokenID, 
     msg->tradePrice, msg->tradeQuantity);
 }
