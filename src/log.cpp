@@ -1,3 +1,4 @@
+// Implementation file for the log class static functions
 #include "log.h"
 
 LogLevel Logger::defaultLevel = LogLevel::INFO;

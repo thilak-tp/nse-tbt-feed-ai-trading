@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <thread>
 #include <fcntl.h>
+
 // Explicit header files
 #include "app_structs.h"
 #include "config_parser.h"
@@ -16,18 +17,22 @@
 
 int main() {
 
+  // Bind thread to a single core and also set the application priority to max
   setRealtimeCPUPriorityAffinity();
+
   // Instances of structures used for populating and multicasting data
   OrderMessage omsg;
   SimulateMTBTValues simMTBTOrd;
-
   TradeMessage tmsg;
   SimulateMTBTValues simMTBTTrd;
+
+  // Check if the environment script is sourced or not
   if(!isEnvScriptSourced())
   {
     std::cout<<"The environment script was not sourced!"<<std::endl;
     return FAILURE;
   }
+
   // Log Initialization
   std::string logDir = getenv("LOG_DIR");
 
@@ -36,6 +41,7 @@ int main() {
   Logger logger(LogLevel::DEBUG, logfilePath);
   //Logger::setGlobalLogLevel(LogLevel::DEBUG);
   //Logger::setGlobalFilename(logfilePath);   
+  
   // Config Initialization
   ConfigParser config;
   if(!config.load("app_config.cfg")) {
@@ -78,8 +84,8 @@ int main() {
   while(true) {
     
 
-    if(sequenceNumber % 3 != 0) 
-    {
+    if(sequenceNumber % 3 != 0) {
+      
       time2 = getCurrentMicroseconds();
       //time2 = getCurrentTimestampUs();
       memset(&omsg,0,sizeof(omsg));
@@ -113,8 +119,7 @@ int main() {
       std::cout<<"The Start time is "<<time2<<" and the end time is "<<time3<<std::endl;
       std::cout<<"The difference is "<<diff<<" seconcds"<<std::endl;
     } 
-    else
-    {
+    else {
 
       memset(&tmsg,0,sizeof(tmsg));
       memset(&simMTBTTrd,0,sizeof(simMTBTTrd));

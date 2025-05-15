@@ -8,24 +8,24 @@
 
 // Setup multicast socket
 int setupMulticastSender(const std::string& group, int port) {
-    int sock = socket(AF_INET, SOCK_DGRAM, 0);
-    if (sock < 0) {
-        perror("socket failed");
-        return -1;
-    }
+  int sock = socket(AF_INET, SOCK_DGRAM, 0);
+  if (sock < 0) {
+    perror("socket failed");
+    return -1;
+  }
 
-    // Configure multicast TTL (time to live)
-    unsigned char ttl = 1; // Limit to local network
-    if (setsockopt(sock, IPPROTO_IP, IP_MULTICAST_TTL, &ttl, sizeof(ttl)) < 0) {
-        perror("setsockopt TTL failed");
-        close(sock);
-        return -1;
-    }
+  // Configure multicast TTL (time to live)
+  unsigned char ttl = 1; // Limit to local network
+  if (setsockopt(sock, IPPROTO_IP, IP_MULTICAST_TTL, &ttl, sizeof(ttl)) < 0) {
+     perror("setsockopt TTL failed");
+     close(sock);
+     return -1;
+  }
 
-    // Increase buffer size to limit packet drops
-    int sndbuf = 4 * 1024 * 1024; // 4MB
-    setsockopt(sock, SOL_SOCKET, SO_SNDBUF, &sndbuf, sizeof(sndbuf));
-    return sock;
+  // Increase buffer size to limit packet drops
+  int sndbuf = 4 * 1024 * 1024; // 4MB
+  setsockopt(sock, SOL_SOCKET, SO_SNDBUF, &sndbuf, sizeof(sndbuf));
+  return sock;
 }
 
 // Send multicast packet

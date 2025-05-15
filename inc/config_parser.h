@@ -13,7 +13,8 @@
 #include "app_defs.h"
 
 #pragma once 
-// A class to handle config parsing for the appication
+
+// A class to handle config parsing for the application
 class ConfigParser {
  
   // A map to store the key value pair
