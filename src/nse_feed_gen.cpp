@@ -4,6 +4,7 @@
 #include <string>
 #include <unistd.h>
 #include <thread>
+
 // Explicit header files
 #include "app_structs.h"
 #include "config_parser.h"
@@ -12,14 +13,17 @@
 #include "common.h"
 #include "multicast.h"
 #include "simulate_mtbt_values.h"
+
 int main() {
 
+  if(!isEnvScriptSourced())
+  {
+    std::cout<<"The environment script was not sourced!"<<std::endl;
+    return FAILURE;
+  }
   // Log Initialization
   std::string logDir = getenv("LOG_DIR");
-  if(logDir.empty()) {
-    std::cout<<"Unable to get the Log directory! Kindly source the enviroment script"<<std::endl;
-  }
-  //Logger logger;
+
   // Populating the current log file path along with its naming convention
   std::string logfilePath = logDir + "/log_" + getCurrentDate() + ".log";
   Logger logger(LogLevel::DEBUG, logfilePath);
@@ -74,7 +78,7 @@ int main() {
       memcpy(packet + sizeof(StreamHeader), &msg, sizeof(OrderMessage));
             
       sendPacket(sock, multicastGroup, port, packet, sizeof(packet));
-      //logger.info("Order | Multicast Sent for Sequence No. {}", sequenceNumber);        
+      logger.info("Order | Multicast Sent for Sequence No. {}", sequenceNumber);        
     } 
     else
     {
@@ -94,7 +98,7 @@ int main() {
       memcpy(packet + sizeof(StreamHeader), &msg, sizeof(TradeMessage));
             
       sendPacket(sock, multicastGroup, port, packet, sizeof(packet));
-      //logger.info("Trade | Multicast Sent for Sequence No. {}", sequenceNumber); 
+      logger.info("Trade | Multicast Sent for Sequence No. {}", sequenceNumber); 
     }
   
     // Sleep for a bit to simulate realistic feed

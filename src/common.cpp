@@ -15,3 +15,10 @@ std::string getCurrentDate() {
   return buff;
 }
 
+// A function to check if the environment script is sourced or not
+bool isEnvScriptSourced()
+{
+  const char* val = getenv("APP_ROOT");
+  
+  return (val != nullptr);
+}
