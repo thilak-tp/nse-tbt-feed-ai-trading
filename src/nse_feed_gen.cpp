@@ -70,10 +70,18 @@ int main() {
 
 
   int sequenceNumber = 1;
+
+  std::string time1, time2, time3;
+
+  //time1 =  getCurrentTimestampUs();
+  time1 =  getCurrentMicroseconds();
   while(true) {
-   
+    
+
     if(sequenceNumber % 3 != 0) 
     {
+      time2 = getCurrentMicroseconds();
+      //time2 = getCurrentTimestampUs();
       memset(&omsg,0,sizeof(omsg));
       memset(&simMTBTOrd,0,sizeof(simMTBTOrd));
       simMTBTOrd.populateOrderMessage(&omsg, sequenceNumber); 
@@ -91,6 +99,19 @@ int main() {
             
       sendPacket(sock, multicastGroup, port, packet, sizeof(packet));
       logger.info("Order | Multicast Sent for Sequence No. {}", sequenceNumber);        
+
+      //time3 = getCurrentTimestampUs();
+      time3 = getCurrentMicroseconds();
+  
+      float f1, f2, f3, diff;
+      f1 = stof(time1);
+      f2 = stof(time2);
+      f3 = stof(time3);
+      diff = f3 - f2;
+      
+  
+      std::cout<<"The Start time is "<<time2<<" and the end time is "<<time3<<std::endl;
+      std::cout<<"The difference is "<<diff<<" seconcds"<<std::endl;
     } 
     else
     {
@@ -117,6 +138,7 @@ int main() {
     // Sleep for a bit to simulate realistic feed
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
   } 
+
   close(sock); 
   return SUCCESS;
 }

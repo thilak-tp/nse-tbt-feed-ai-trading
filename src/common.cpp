@@ -49,3 +49,81 @@ void setRealtimeCPUPriorityAffinity()
     std::cout<<"Successfully set realtime priority (FIFO 90)"<<std::endl;
 
 }
+
+
+// A millisecond level time function
+
+
+std::string getCurrentTimestampMs() {
+    using namespace std::chrono;
+
+    // Get current time_point
+    auto now = system_clock::now();
+    auto now_ms = time_point_cast<milliseconds>(now);
+    auto value = now_ms.time_since_epoch();
+    long ms = value.count() % 1000;
+
+    // Convert to time_t to get calendar time
+    std::time_t now_c = system_clock::to_time_t(now);
+
+    std::tm tm_now;
+    #if defined(_WIN32) || defined(_WIN64)
+    localtime_s(&tm_now, &now_c);
+    #else
+    localtime_r(&now_c, &tm_now);
+    #endif
+
+    // Format timestamp
+    std::ostringstream oss;
+    oss << std::put_time(&tm_now, "%Y-%m-%d %H:%M:%S")
+        << '.' << std::setfill('0') << std::setw(3) << ms;
+
+    return oss.str();
+}
+
+std::string getCurrentTimestampUs() {
+    using namespace std::chrono;
+
+    auto now = system_clock::now();
+    auto now_us = time_point_cast<microseconds>(now);
+    auto value = now_us.time_since_epoch();
+    long long us = value.count() % 1000000;
+
+    std::time_t now_c = system_clock::to_time_t(now);
+    std::tm tm_now;
+#if defined(_WIN32) || defined(_WIN64)
+    localtime_s(&tm_now, &now_c);
+#else
+    localtime_r(&now_c, &tm_now);
+#endif
+
+    std::ostringstream oss;
+    oss << std::put_time(&tm_now, "%Y-%m-%d %H:%M:%S")
+        << '.' << std::setfill('0') << std::setw(6) << us;
+
+    return oss.str();
+}
+
+std::string getCurrentMicroseconds() {
+    using namespace std::chrono;
+
+    auto now = system_clock::now();
+    auto now_us = time_point_cast<microseconds>(now);
+    auto value = now_us.time_since_epoch();
+    long long us = value.count() % 1000000;
+
+    std::time_t now_c = system_clock::to_time_t(now);
+    std::tm tm_now;
+#if defined(_WIN32) || defined(_WIN64)
+    localtime_s(&tm_now, &now_c);
+#else
+    localtime_r(&now_c, &tm_now);
+#endif
+
+    std::ostringstream oss;
+    oss << std::put_time(&tm_now, "%S")
+        << '.' << std::setfill('0') << std::setw(6) << us;
+
+    return oss.str();
+}
+
