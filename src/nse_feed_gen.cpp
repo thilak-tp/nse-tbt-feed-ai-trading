@@ -4,7 +4,7 @@
 #include <string>
 #include <unistd.h>
 #include <thread>
-
+#include <fcntl.h>
 // Explicit header files
 #include "app_structs.h"
 #include "config_parser.h"
@@ -16,6 +16,13 @@
 
 int main() {
 
+  setRealtimeCPUPriorityAffinity();
+  // Instances of structures used for populating and multicasting data
+  OrderMessage omsg;
+  SimulateMTBTValues simMTBTOrd;
+
+  TradeMessage tmsg;
+  SimulateMTBTValues simMTBTTrd;
   if(!isEnvScriptSourced())
   {
     std::cout<<"The environment script was not sourced!"<<std::endl;
@@ -43,8 +50,8 @@ int main() {
   else
     logger.enableDebug(false);
   
-  std::string multicastGroup = config.getValue("MC_IP");
-  int port = std::stoi(config.getValue("MC_PORT"));
+  const std::string multicastGroup = config.getValue("MC_IP");
+  const int port = std::stoi(config.getValue("MC_PORT"));
 
   logger.info("Inisde the main function");
   logger.debug("The value for the key MC_IP is {}", config.getValue("MC_IP"));
@@ -57,15 +64,20 @@ int main() {
     return FAILURE;
   }
 
+  // Setting the socket to non blocking mode so the system interrupts don't block the sock operations
+  fcntl(sock, F_SETFL, O_NONBLOCK);
+
+
+
   int sequenceNumber = 1;
   while(true) {
    
     if(sequenceNumber % 3 != 0) 
     {
-      OrderMessage msg;
-      SimulateMTBTValues simMTBTOrd;
-      simMTBTOrd.populateOrderMessage(&msg, sequenceNumber); 
-      simMTBTOrd.displayOrderMessage(&msg); 
+      memset(&omsg,0,sizeof(omsg));
+      memset(&simMTBTOrd,0,sizeof(simMTBTOrd));
+      simMTBTOrd.populateOrderMessage(&omsg, sequenceNumber); 
+      simMTBTOrd.displayOrderMessage(&omsg); 
       
       StreamHeader header;
       header.msgLen = sizeof(StreamHeader) + sizeof(OrderMessage);
@@ -75,17 +87,18 @@ int main() {
       // Create packet buffer
       char packet[sizeof(StreamHeader) + sizeof(OrderMessage)];
       memcpy(packet, &header, sizeof(StreamHeader));
-      memcpy(packet + sizeof(StreamHeader), &msg, sizeof(OrderMessage));
+      memcpy(packet + sizeof(StreamHeader), &omsg, sizeof(OrderMessage));
             
       sendPacket(sock, multicastGroup, port, packet, sizeof(packet));
       logger.info("Order | Multicast Sent for Sequence No. {}", sequenceNumber);        
     } 
     else
     {
-      TradeMessage msg;
-      SimulateMTBTValues simMTBTTrd;
-      simMTBTTrd.populateTradeMessage(&msg, sequenceNumber); 
-      simMTBTTrd.displayTradeMessage(&msg); 
+
+      memset(&tmsg,0,sizeof(tmsg));
+      memset(&simMTBTTrd,0,sizeof(simMTBTTrd));
+      simMTBTTrd.populateTradeMessage(&tmsg, sequenceNumber); 
+      simMTBTTrd.displayTradeMessage(&tmsg); 
       
       StreamHeader header;
       header.msgLen = sizeof(StreamHeader) + sizeof(TradeMessage);
@@ -95,7 +108,7 @@ int main() {
       // Create packet buffer
       char packet[sizeof(StreamHeader) + sizeof(TradeMessage)];
       memcpy(packet, &header, sizeof(StreamHeader));
-      memcpy(packet + sizeof(StreamHeader), &msg, sizeof(TradeMessage));
+      memcpy(packet + sizeof(StreamHeader), &tmsg, sizeof(TradeMessage));
             
       sendPacket(sock, multicastGroup, port, packet, sizeof(packet));
       logger.info("Trade | Multicast Sent for Sequence No. {}", sequenceNumber); 

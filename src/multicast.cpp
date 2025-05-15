@@ -22,6 +22,9 @@ int setupMulticastSender(const std::string& group, int port) {
         return -1;
     }
 
+    // Increase buffer size to limit packet drops
+    int sndbuf = 4 * 1024 * 1024; // 4MB
+    setsockopt(sock, SOL_SOCKET, SO_SNDBUF, &sndbuf, sizeof(sndbuf));
     return sock;
 }
 
