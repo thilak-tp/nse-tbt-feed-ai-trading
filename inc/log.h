@@ -21,14 +21,20 @@ class Logger {
 
   public:
      
-    Logger(){}
 
-    Logger(LogLevel level, const std::string& filename): minLevel(level) {
-      std::string fileToOpen = filename.empty() ? defaultFilename : filename;
-    
+    Logger(LogLevel level = defaultLevel, const std::string& filename = defaultFilename): minLevel(level) {
+      //std::string fileToOpen = filename.empty() ? defaultFilename : filename;
+      std::string fileToOpen = filename.empty() ? Logger::defaultFilename : filename; 
       if (!fileToOpen.empty()) {
         fileStream.open(fileToOpen, std::ios::app);
+        if(!fileStream.is_open()) {
+          std::cout<<"Failed to open log file "<<fileToOpen<<std::endl;
+        }
       }
+      else {
+        std::cout<<"Default filename is also empty"<<std::endl;  
+      }
+
     }
 
     ~Logger() {

@@ -35,12 +35,19 @@ int main() {
 
   // Log Initialization
   std::string logDir = getenv("LOG_DIR");
-
+  if(logDir.empty()) {
+    std::cout<<"Log directory not set in the environment"<<std::endl;
+    return FAILURE;
+  }
   // Populating the current log file path along with its naming convention
   std::string logfilePath = logDir + "/log_" + getCurrentDate() + ".log";
-  Logger logger(LogLevel::DEBUG, logfilePath);
-  //Logger::setGlobalLogLevel(LogLevel::DEBUG);
-  //Logger::setGlobalFilename(logfilePath);   
+
+  //Logger logger(LogLevel::DEBUG, logfilePath);
+  Logger::setGlobalLogLevel(LogLevel::DEBUG);
+  Logger::setGlobalFilename(logfilePath);
+
+  Logger logger;
+
   
   // Config Initialization
   ConfigParser config;
@@ -91,20 +98,20 @@ int main() {
       memset(&omsg,0,sizeof(omsg));
       memset(&simMTBTOrd,0,sizeof(simMTBTOrd));
       simMTBTOrd.populateOrderMessage(&omsg, sequenceNumber); 
-      simMTBTOrd.displayOrderMessage(&omsg); 
+      //simMTBTOrd.displayOrderMessage(&omsg); 
       
       StreamHeader header;
       header.msgLen = sizeof(StreamHeader) + sizeof(OrderMessage);
       header.streamID = 1;
       header.sequenceNo = sequenceNumber++;
-            
+      std::cout<<omsg.msgType<<" "<<omsg.timestamp<<" "<<omsg.orderID<<" "<<omsg.tokenID<<" "<<omsg.orderType<<" "<<omsg.price<<" "<<omsg.quantity<<std::endl;      
       // Create packet buffer
       char packet[sizeof(StreamHeader) + sizeof(OrderMessage)];
       memcpy(packet, &header, sizeof(StreamHeader));
       memcpy(packet + sizeof(StreamHeader), &omsg, sizeof(OrderMessage));
             
       sendPacket(sock, multicastGroup, port, packet, sizeof(packet));
-      logger.info("Order | Multicast Sent for Sequence No. {}", sequenceNumber);        
+      //logger.info("Order | Multicast Sent for Sequence No. {}", sequenceNumber);        
 
       //time3 = getCurrentTimestampUs();
       time3 = getCurrentMicroseconds();
@@ -116,7 +123,7 @@ int main() {
       diff = f3 - f2;
       
   
-      std::cout<<"The Start time is "<<time2<<" and the end time is "<<time3<<std::endl;
+      //std::cout<<"The Start time is "<<time2<<" and the end time is "<<time3<<std::endl;
       std::cout<<"The difference is "<<diff<<" seconcds"<<std::endl;
     } 
     else {
@@ -124,20 +131,21 @@ int main() {
       memset(&tmsg,0,sizeof(tmsg));
       memset(&simMTBTTrd,0,sizeof(simMTBTTrd));
       simMTBTTrd.populateTradeMessage(&tmsg, sequenceNumber); 
-      simMTBTTrd.displayTradeMessage(&tmsg); 
+      //simMTBTTrd.displayTradeMessage(&tmsg); 
       
       StreamHeader header;
       header.msgLen = sizeof(StreamHeader) + sizeof(TradeMessage);
       header.streamID = 1;
       header.sequenceNo = sequenceNumber++;
-            
+       
+      std::cout<<tmsg.msgType<<" "<<tmsg.timestamp<<" "<<tmsg.buyOrderID<<" "<<tmsg.sellOrderID<<" "<<tmsg.tokenID<<" "<<tmsg.tradePrice<<" "<<tmsg.tradeQuantity<<std::endl;      
       // Create packet buffer
       char packet[sizeof(StreamHeader) + sizeof(TradeMessage)];
       memcpy(packet, &header, sizeof(StreamHeader));
       memcpy(packet + sizeof(StreamHeader), &tmsg, sizeof(TradeMessage));
             
       sendPacket(sock, multicastGroup, port, packet, sizeof(packet));
-      logger.info("Trade | Multicast Sent for Sequence No. {}", sequenceNumber); 
+      //logger.info("Trade | Multicast Sent for Sequence No. {}", sequenceNumber); 
     }
   
     // Sleep for a bit to simulate realistic feed
