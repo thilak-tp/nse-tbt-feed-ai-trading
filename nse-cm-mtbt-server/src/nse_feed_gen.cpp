@@ -51,7 +51,7 @@ int main() {
   
   // Config Initialization
   ConfigParser config;
-  if(!config.load("app_config.cfg")) {
+  if(!config.load("server_config.cfg")) {
     logger.warning("The configuration file specified was not found!");
     return FAILURE;
   }

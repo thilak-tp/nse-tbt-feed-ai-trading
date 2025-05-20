@@ -12,11 +12,11 @@ export BIN_DIR="$APP_ROOT/bin"
 export SCRIPT_DIR="$APP_ROOT/scripts"
 
 # Adding some aliases for easier movement in the application
-alias nroot="cd $APP_ROOT"
-alias nsrc="cd $SRC_DIR"
-alias ninc="cd $INC_DIR"
-alias nscript="cd $SCRIPT_DIR"
-alias ncfg="cd $CFG_DIR"
-alias nbin="cd $BIN_DIR"
-alias nlog="cd $LOG_DIR"
+alias root="cd $APP_ROOT"
+alias src="cd $SRC_DIR"
+alias inc="cd $INC_DIR"
+alias script="cd $SCRIPT_DIR"
+alias cfg="cd $CFG_DIR"
+alias bin="cd $BIN_DIR"
+alias log="cd $LOG_DIR"
 
