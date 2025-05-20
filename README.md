@@ -38,6 +38,7 @@ Server End Data Simulation:
 - Statistically most of the orders are order cancellations (55%), order modifications (35%) and the least are new orders (10%) so the orders are simulated with this probability in mind 
 - 50% of the trades are buy and 50% are sell trades
 - Uniform distributions are used for various simulations for both order and trade messages
+- Pump actual data from the server to get more accurate and realworld results. a). Get an old UDP dump file from NSE Data Analytics b). Repurpose available sample csv files from historical data or similar products to create a UDP dump that can be played (TODO)
 
 Server End Optimizations
 - CPU Isolation: Binded the mainthread to Core 2 of the CPU to a) Avoid Cache Misses b) To avoid changing on cores which leads to better performance
