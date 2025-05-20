@@ -5,7 +5,7 @@
 bool ConfigParser::load(const std::string &filename) {
   
   // Get the config file path
-  std::string appRootPath = getenv("CFG_DIR");
+  std::string appRootPath = getenv("CCFG_DIR");
   
   if(appRootPath.empty()){
       std::cout<<"Kindly source the environment script"<<std::endl;

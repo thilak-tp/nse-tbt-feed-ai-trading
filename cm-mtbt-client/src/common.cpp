@@ -5,6 +5,7 @@
 
 // Implicit header files
 #include<string>
+#include<cstring>
 #include<ctime>
 #include<pthread.h>
 #include<sched.h>
@@ -21,35 +22,35 @@ std::string getCurrentDate() {
 }
 
 // A function to check if the environment script is sourced or not
-bool isEnvScriptSourced() {
+bool isEnvScriptSourced(std::string envVariable) {
 
-  const char* val = getenv("APP_ROOT");  
+  const char* val = getenv(envVariable.c_str());  
   return (val != nullptr);
 }
 
 // A function to bind the thread to a single core and also set affinity
-void setRealtimeCPUPriorityAffinity() {
+void setRealtimeCPUPriorityAffinity( const int coreNumber, const int priority) {
   
   // Setting realtime affinity
   cpu_set_t cpuset;
   CPU_ZERO(&cpuset);
-  CPU_SET(3, &cpuset);
+  CPU_SET(coreNumber, &cpuset);
 
   int result = pthread_setaffinity_np(pthread_self(), sizeof(cpu_set_t), &cpuset);
   if(result != 0)
     std::cout<<"Failed to set CPU affinity"<<std::endl;
   else  
-    std::cout<<"Successfully set CPU affinity to core 2"<<std::endl;
+    std::cout<<"Successfully set CPU affinity to core "<<coreNumber<<std::endl;
   
   // Set realtime priority
   sched_param schParams;
-  schParams.sched_priority = 90;
+  schParams.sched_priority = priority;
   
   result = pthread_setschedparam(pthread_self(), SCHED_FIFO,&schParams);
   if(result != 0)
     std::cout<<"Failed to set realtime priority"<<std::endl;
   else
-    std::cout<<"Successfully set realtime priority (FIFO 90)"<<std::endl;
+    std::cout<<"Successfully set realtime priority (FIFO "<<priority<<" )"<<std::endl;
 
 }
 

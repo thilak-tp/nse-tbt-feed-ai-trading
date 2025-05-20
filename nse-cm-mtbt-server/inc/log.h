@@ -8,7 +8,7 @@
 #include <format>
 #include <ctime>
 
-#define LOG_FILE_START "log_"
+#define LOG_FILE_START "server_log_"
 
 enum class LogLevel {
     DEBUG,

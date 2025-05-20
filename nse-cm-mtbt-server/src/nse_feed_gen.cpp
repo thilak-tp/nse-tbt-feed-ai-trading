@@ -18,16 +18,16 @@
 int main() {
 
   // Bind thread to a single core and also set the application priority to max
-  setRealtimeCPUPriorityAffinity();
+  setRealtimeCPUPriorityAffinity(2, 90);
 
   // Instances of structures used for populating and multicasting data
-  OrderMessage omsg;
+  OrderMessage omsg = {0};
   SimulateMTBTValues simMTBTOrd;
-  TradeMessage tmsg;
+  TradeMessage tmsg = {0};
   SimulateMTBTValues simMTBTTrd;
 
   // Check if the environment script is sourced or not
-  if(!isEnvScriptSourced())
+  if(!isEnvScriptSourced("APP_ROOT"))
   {
     std::cout<<"The environment script was not sourced!"<<std::endl;
     return FAILURE;
@@ -40,7 +40,7 @@ int main() {
     return FAILURE;
   }
   // Populating the current log file path along with its naming convention
-  std::string logfilePath = logDir + "/log_" + getCurrentDate() + ".log";
+  std::string logfilePath = logDir + "//" +LOG_FILE_START + getCurrentDate() + ".log";
 
   //Logger logger(LogLevel::DEBUG, logfilePath);
   Logger::setGlobalLogLevel(LogLevel::DEBUG);
