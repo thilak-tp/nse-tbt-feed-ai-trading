@@ -8,6 +8,51 @@
 #include <map>
 #include <arpa/inet.h>  // For htons, ntohs, etc.
 #include <netinet/in.h> // For sockaddr_in
+//#include<app_structs.h>
+
+// Handle a parsed Order Message
+void handleOrderMessage(const OrderMessage& msg) {
+    auto& book = order_books[msg.tokenID];
+    if (msg.msgType == 'N' || msg.msgType == 'M') {
+        Order order { msg.orderID, msg.price, msg.quantity, msg.orderType };
+        if (msg.orderType == 'B')
+            book.buy_orders.insert({msg.price, order});
+        else
+            book.sell_orders.insert({msg.price, order});
+    } 
+    else if (msg.msgType == 'X') {
+        // Cancel - real systems match by OrderID, simplified here
+        // TODO: Handle correct order cancel by ID
+    }
+}
+
+// Handle a parsed Trade Message
+void handleTradeMessage(const TradeMessage& msg) {
+    auto& book = order_books[msg.tokenID];
+    MarketSnapshot snapshot;
+
+    snapshot.token = msg.tokenID;
+    snapshot.timestamp = msg.timestamp;
+    snapshot.last_traded_price = msg.tradePrice;
+    snapshot.last_traded_qty = msg.tradeQuantity;
+
+    if (!book.buy_orders.empty()) {
+        snapshot.best_buy_price = book.buy_orders.begin()->first;
+        snapshot.best_buy_qty = book.buy_orders.begin()->second.quantity;
+    }
+
+    if (!book.sell_orders.empty()) {
+        snapshot.best_sell_price = book.sell_orders.begin()->first;
+        snapshot.best_sell_qty = book.sell_orders.begin()->second.quantity;
+    }
+
+    // Here you would normally pass this snapshot to your AI model
+    std::cout << "Market Snapshot: Token " << snapshot.token 
+              << " BestBuy " << snapshot.best_buy_price 
+              << " BestSell " << snapshot.best_sell_price 
+              << " LTP " << snapshot.last_traded_price << std::endl;
+}
+
 
 
 // Setup UDP Multicast socket
@@ -52,7 +97,7 @@ void parsePacket(const char* buffer, size_t size) {
     const StreamHeader* header = reinterpret_cast<const StreamHeader*>(buffer);
     const char* payload = buffer + sizeof(StreamHeader);
 
-    if (size < header->msg_len) return; // Invalid packet
+    if (size < header->msgLen) return; // Invalid packet
 
     char msg_type = *payload;
 
@@ -63,10 +108,6 @@ void parsePacket(const char* buffer, size_t size) {
     else if (msg_type == 'T') {
         const TradeMessage* trade_msg = reinterpret_cast<const TradeMessage*>(payload);
         handleTradeMessage(*trade_msg);
-    }
-    else if (msg_type == 'H') {
-        const HeartbeatMessage* heart_beat_msg = reinterpret_cast<const HeartbeatMessage*>(payload);
-        handleHeartBeatMessage(*heart_beat_msg);       
     }
     else {
         // Ignore other message types for now

@@ -1,6 +1,39 @@
 //This header contains the commonly used structures in the program
+#ifndef APP_STRUCT_H
+#define APP_STRUCT_H
+
+
 #include<cstdint>
-#pragma once
+#include<map>
+
+
+
+// Internal OrderBook Structures
+struct Order {
+    double order_id;
+    int price;    // in paise
+    int quantity;
+    char side;    // 'B' or 'S'
+};
+
+struct OrderBook {
+    std::multimap<int, Order, std::greater<int>> buy_orders;  // Highest price first
+    std::multimap<int, Order, std::less<int>> sell_orders;    // Lowest price first
+};
+
+struct MarketSnapshot {
+    int best_buy_price = 0;
+    int best_sell_price = 0;
+    int best_buy_qty = 0;
+    int best_sell_qty = 0;
+    double last_traded_price = 0;
+    int last_traded_qty = 0;
+    int token = 0;
+    int64_t timestamp = 0;
+};
+
+// Global OrderBooks per token
+inline std::map<int, OrderBook> order_books;
 
 // Structure for NSE CM Feed Header
 struct StreamHeader {
@@ -36,5 +69,4 @@ struct TradeMessage {
   int tradeQuantity; //Quantity of the order
   
 };
-
-#pragma once
+#endif

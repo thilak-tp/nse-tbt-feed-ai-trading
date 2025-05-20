@@ -6,6 +6,9 @@
 #include <unistd.h>
 #include <thread>
 #include <fcntl.h>
+#include <sys/types.h>   
+#include <sys/socket.h>     
+#include <map>
 
 // Explicit header files
 #include "app_structs.h"
@@ -69,33 +72,15 @@ int main() {
 
   int sock = setupSocket(multicastGroup, port);
   char buffer[4096];
-  struct sockaddr_in sender_addr {};
-  socklen_t addr_len = sizeof(sender_addr);
 
   while (true) {
-
-    //ssize_t bytes_received = recv(sock, buffer, sizeof(buffer), 0);
-    ssize_t bytes_received = recvfrom(
-            sock,                      // your socket
-            buffer, sizeof(buffer),   // buffer and its size
-            0,                        // flags (usually 0)
-            (struct sockaddr*)&sender_addr, &addr_len);
+    ssize_t bytes_received = recv(sock, buffer, sizeof(buffer), 0);
     if (bytes_received > 0) {
       parsePacket(buffer, bytes_received);
     }
-    else {
-       std::cout<<"recvfrom failded!"<<endl;
-       continue;
-    }
+
   }
-  char sender_ip[INET_ADDRSTRLEN];
-  inet_ntop(AF_INET, &(sender_addr.sin_addr), sender_ip, INET_ADDRSTRLEN);
-  std::cout << "Received packet from " << sender_ip << ":" << ntohs(sender_addr.sin_port) 
-    << " (" << bytes_received << " bytes)" << std::endl;
-
-  parsePacket(buffer, bytes_received);
-
   close(sock);
 
   return 0;
-}
+ }
