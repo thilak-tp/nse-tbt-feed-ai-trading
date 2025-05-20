@@ -17,3 +17,36 @@ I will be mentioning what I do for each of the skill points mentioned above.
 
 ## Basic Architecture:
 ![screenshot](resources/basic-architecture.png)
+Progress:
+1. CM MTBT (Capital Markets: Multicast Tick By Tick) 
+Features and Optimizations:
+
+Logging: For application logging
+- Logging class which takes arguements while logging as well
+- Logging is of multiple levels: INFO,DEBUG, WARNING, ERROR
+
+Config Parsing: Key value type config file
+- Config parser class which takens config file and populates an unordered map with the key and value pairs which are then accessed there and when required.
+
+Scripts: Application dependant BASH scripts
+- set_env.sh  - Sets the environment variables as well as navigation aliases for easy navigtion through the application directories
+- startup.sh  - To launch the application (TODO)
+- shutdown.sh - To shutdown the application (TODO)
+- monitor.sh  - To monitor the application and feed status (TODO)
+
+Server End Data Simulation: 
+- Statistically most of the orders are order cancellations (55%), order modifications (35%) and the least are new orders (10%) so the orders are simulated with this probability in mind 
+- 50% of the trades are buy and 50% are sell trades
+- Uniform distributions are used for various simulations for both order and trade messages
+
+Server End Optimizations
+- CPU Isolation: Binded the mainthread to Core 2 of the CPU to a) Avoid Cache Misses b) To avoid changing on cores which leads to better performance
+- Multithreading was not used since the latency for populating and sending the messages on multicast took less that 1ms
+- S0_SNDBUF size was increased to handle drops due to burst of traffic
+- Cache data so the cost for retrieve all the values everytime when it is required is low (TODO)
+- Fcntl non-blocking enabled to disable socket being interuppted by the system
+- Used const in parameters and wherever required to indicate values that don't change so as to let the compiler can go ahead and rigorously compile it
+- Avoided logs in the hot paths to recrease the load due to them and the latency it adds
+- Reuse of structure and class instances instead of declaring one everytime to avoid memory leaks.
+
+
