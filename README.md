@@ -18,7 +18,7 @@ I will be mentioning what I do for each of the skill points mentioned above.
 ## Basic Architecture:
 ![screenshot](resources/basic-architecture.png)
 Progress:
-### 1. CM MTBT (Capital Markets: Multicast Tick By Tick) 
+### 1. CM MTBT (Capital Markets: Multicast Tick By Tick) Server 
 Features and Optimizations:
 
 Logging: For application logging
@@ -41,13 +41,14 @@ Server End Data Simulation:
 - Pump actual data from the server to get more accurate and realworld results. a). Get an old UDP dump file from NSE Data Analytics b). Repurpose available sample csv files from historical data or similar products to create a UDP dump that can be played (TODO)
 
 Server End Optimizations
-- CPU Isolation: Binded the mainthread to Core 2 of the CPU to a) Avoid Cache Misses b) To avoid switching of cores : which leads to better performance
-- Multithreading was not used since the latency for populating and sending the messages on multicast took less that 1ms
-- S0_SNDBUF size was increased to handle drops due to burst of traffic
+- CPU Isolation: Binded the mainthread to Core 2 of the CPU to 
+a) Avoid Cache Misses b) To avoid switching of cores : which leads to better performance
+- Multithreading was not used since the latency for populating and sending the messages on multicast took less than 1ms per packet.
+- S0_SNDBUF size was increased to handle drops due to packet bursts.
 - Cache data so the cost for retrieve all the values everytime when it is required is low (TODO)
 - Fcntl non-blocking enabled to disable socket being interuppted by the system
-- Used const in parameters and wherever required to indicate values that don't change so as to let the compiler can go ahead and rigorously compile it
-- Avoided logs in the hot paths to recrease the load due to them and the latency it adds
+- Used const in parameters and wherever required to indicate values that don't change so letting the compiler go ahead and rigorously optimize it.
+- Avoided logs in the hot paths to decrease the load due to them and the latency they add.
 - Reuse of structure and class instances instead of declaring one everytime to avoid memory leaks.
 
 
