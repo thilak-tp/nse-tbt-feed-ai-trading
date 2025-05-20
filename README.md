@@ -26,7 +26,7 @@ Logging: For application logging
 - Logging is of multiple levels: INFO,DEBUG, WARNING, ERROR
 
 Config Parsing: Key value type config file
-- Config parser class which takens config file and populates an unordered map with the key and value pairs which are then accessed there and when required.
+- Config parser class which takes config file and populates an unordered map with the key and value pairs which are then accessed there and when required.
 
 Scripts: Application dependant BASH scripts
 - set_env.sh  - Sets the environment variables as well as navigation aliases for easy navigtion through the application directories
