@@ -59,3 +59,8 @@ a) Avoid Cache Misses b) To avoid switching of cores : which leads to better per
 - Use compile time polymorphism (static binding) and void runtime polymorphismm (DONE) - This reduces latency during runtime.
 - Branchless coding and avoiding dynamic memory allocation or logs in hot paths.
 
+### Measureable Approximations and Trends to be analyzed from data
+- Spread = Ask - Bid
+- Mid-price = (Bid + Ask) / 2
+- Price impact = Trade price vs. Mid price
+- Order imbalance = (Bid size - Ask size) / (Bid size + Ask size)
