@@ -107,7 +107,7 @@ int main() {
       header.msgLen = sizeof(StreamHeader) + sizeof(OrderMessage);
       header.streamID = 1;
       header.sequenceNo = sequenceNumber++;
-      std::cout<<std::fixed<<omsg.msgType<<" "<<omsg.timestamp<<" "<<omsg.orderID<<" "<<omsg.tokenID<<" "<<omsg.orderType<<" "<<omsg.price<<" "<<omsg.quantity<<std::endl;      
+      //std::cout<<std::fixed<<omsg.msgType<<" "<<omsg.timestamp<<" "<<omsg.orderID<<" "<<omsg.tokenID<<" "<<omsg.orderType<<" "<<omsg.price<<" "<<omsg.quantity<<std::endl;      
       // Create packet buffer
       char packet[sizeof(StreamHeader) + sizeof(OrderMessage)];
       memcpy(packet, &header, sizeof(StreamHeader));
@@ -141,7 +141,7 @@ int main() {
       header.streamID = 1;
       header.sequenceNo = sequenceNumber++;
        
-      std::cout<<std::fixed<<tmsg.msgType<<" "<<tmsg.timestamp<<" "<<tmsg.buyOrderID<<" "<<tmsg.sellOrderID<<" "<<tmsg.tokenID<<" "<<tmsg.tradePrice<<" "<<tmsg.tradeQuantity<<std::endl;      
+      //std::cout<<std::fixed<<tmsg.msgType<<" "<<tmsg.timestamp<<" "<<tmsg.buyOrderID<<" "<<tmsg.sellOrderID<<" "<<tmsg.tokenID<<" "<<tmsg.tradePrice<<" "<<tmsg.tradeQuantity<<std::endl;      
       // Create packet buffer
       char packet[sizeof(StreamHeader) + sizeof(TradeMessage)];
       memcpy(packet, &header, sizeof(StreamHeader));

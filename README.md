@@ -51,4 +51,11 @@ a) Avoid Cache Misses b) To avoid switching of cores : which leads to better per
 - Avoided logs in the hot paths to decrease the load due to them and the latency they add.
 - Reuse of structure and class instances instead of declaring one everytime to avoid memory leaks.
 
+### Core Goals of Low-Latency in C++
+- Kernel Bypass to access NIC directly and reduce Kernel induced copy and parsing - usnig DPDK (TODO)
+- Zero Copy Parsing to directly parse packets without using memcpy(TODO)
+- Use lock Free Queues and atomic instead of mutexes (Boost Library) 
+- Maximize Cache locality and CPU pridictability - Bind threads to core and set thread priority (DONE)
+- Use compile time polymorphism (static binding) and void runtime polymorphismm (DONE) - This reduces latency during runtime.
+- Branchless coding and avoiding dynamic memory allocation or logs in hot paths.
 
