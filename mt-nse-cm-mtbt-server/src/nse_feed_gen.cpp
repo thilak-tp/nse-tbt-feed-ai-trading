@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <thread>
 #include <fcntl.h>
+#include <boost/lockfree/queue.hpp>
 
 // Explicit header files
 #include "app_structs.h"
@@ -14,6 +15,9 @@
 #include "common.h"
 #include "multicast.h"
 #include "simulate_mtbt_values.h"
+#include <boost/lockfree/queue.hpp>
+boost::lockfree::queue<Packet*> packetQueue(1024);
+boost::lockfree::queue<std::string*> logQueue(1024);
 
 int main() {
   // Bind thread to a single core and also set the application priority to max
