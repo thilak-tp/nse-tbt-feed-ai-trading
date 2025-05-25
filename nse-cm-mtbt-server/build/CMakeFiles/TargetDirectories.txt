@@ -1,0 +1,3 @@
+/home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/build/CMakeFiles/nse_sim.dir
+/home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/build/CMakeFiles/edit_cache.dir
+/home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/build/CMakeFiles/rebuild_cache.dir
