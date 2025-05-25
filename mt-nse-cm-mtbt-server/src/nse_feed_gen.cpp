@@ -16,7 +16,7 @@
 #include "multicast.h"
 #include "simulate_mtbt_values.h"
 #include <boost/lockfree/queue.hpp>
-boost::lockfree::queue<Packet*> packetQueue(1024);
+boost::lockfree::queue<OrderMessage*> packetQueue(1024);
 boost::lockfree::queue<std::string*> logQueue(1024);
 
 int main() {

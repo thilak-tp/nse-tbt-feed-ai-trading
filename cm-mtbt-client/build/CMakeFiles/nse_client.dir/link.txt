@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/nse_client.dir/src/common.cpp.o CMakeFiles/nse_client.dir/src/config_parser.cpp.o CMakeFiles/nse_client.dir/src/log.cpp.o CMakeFiles/nse_client.dir/src/multicast.cpp.o CMakeFiles/nse_client.dir/src/nse_feed_client.cpp.o -o /home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/cm-mtbt-client/bin/nse_client 
