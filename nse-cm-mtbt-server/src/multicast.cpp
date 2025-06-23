@@ -4,7 +4,7 @@
 #include <cstring>
 #include <string>
 #include <unistd.h>
-
+#include "latency_benchmark.h"
 
 // Setup multicast socket
 int setupMulticastSender(const std::string& group, int port) {
@@ -34,7 +34,6 @@ void sendPacket(int sock, const std::string& group, int port, const char* data, 
     addr.sin_family = AF_INET;
     addr.sin_port = htons(port);
     addr.sin_addr.s_addr = inet_addr(group.c_str());
-
     ssize_t sent = sendto(sock, data, len, 0, (struct sockaddr*)&addr, sizeof(addr));
     if (sent < 0) {
         perror("sendto failed");

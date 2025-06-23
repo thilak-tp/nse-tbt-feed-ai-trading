@@ -5,6 +5,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/nse_sim.dir/src/common.cpp.o.d"
   "CMakeFiles/nse_sim.dir/src/config_parser.cpp.o"
   "CMakeFiles/nse_sim.dir/src/config_parser.cpp.o.d"
+  "CMakeFiles/nse_sim.dir/src/latency_benchmark.cpp.o"
+  "CMakeFiles/nse_sim.dir/src/latency_benchmark.cpp.o.d"
   "CMakeFiles/nse_sim.dir/src/log.cpp.o"
   "CMakeFiles/nse_sim.dir/src/log.cpp.o.d"
   "CMakeFiles/nse_sim.dir/src/multicast.cpp.o"

@@ -81,12 +81,12 @@ clean: CMakeFiles/nse_sim.dir/clean
 CMakeFiles/nse_sim.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/nse_sim.dir/build.make CMakeFiles/nse_sim.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/nse_sim.dir/build.make CMakeFiles/nse_sim.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/build/CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target nse_sim"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8 "Built target nse_sim"
 .PHONY : CMakeFiles/nse_sim.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/nse_sim.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/build/CMakeFiles 7
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/build/CMakeFiles 8
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/nse_sim.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/build/CMakeFiles 0
 .PHONY : CMakeFiles/nse_sim.dir/rule

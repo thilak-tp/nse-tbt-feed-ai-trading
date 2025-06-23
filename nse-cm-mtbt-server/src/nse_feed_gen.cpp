@@ -14,17 +14,24 @@
 #include "common.h"
 #include "multicast.h"
 #include "simulate_mtbt_values.h"
+#include "latency_benchmark.h"
 
 int main() {
   // Bind thread to a single core and also set the application priority to max
-  setRealtimeCPUPriorityAffinity(CORE_INDEX, SCHED_PRIORITY);
+  LatencyBenchmark bench;
+  bench.start();
+  //setRealtimeCPUPriorityAffinity(CORE_INDEX, SCHED_PRIORITY);
 
   // Instances of structures used for populating and multicasting data
   OrderMessage omsg = {0};
   TradeMessage tmsg = {0};
+
+  StreamHeader header = {0}; 
   SimulateMTBTValues simMTBTOrd;
   SimulateMTBTValues simMTBTTrd;
+  
 
+   
   // Check if the environment script is sourced or not
   if(!isEnvScriptSourced(ROOT_DIR_ENV))
   {
@@ -87,23 +94,23 @@ int main() {
 
   int sequenceNumber = 1;
 
-  std::string time1, time2, time3;
-
-  //time1 =  getCurrentTimestampUs();
-  time1 =  getCurrentMicroseconds();
+  bench.stop();
+  bench.report();
+  bench.reset();
   while(true) {
     
 
     if(sequenceNumber % 3 != 0) {
-      
-      time2 = getCurrentMicroseconds();
+
       //time2 = getCurrentTimestampUs();
       memset(&omsg,0,sizeof(omsg));
-
+      memset(&header,0,sizeof(header));
       simMTBTOrd.populateOrderMessage(&omsg, sequenceNumber); 
       //simMTBTOrd.displayOrderMessage(&omsg); 
       
-      StreamHeader header;
+
+
+
       header.msgLen = sizeof(StreamHeader) + sizeof(OrderMessage);
       header.streamID = 1;
       header.sequenceNo = sequenceNumber++;
@@ -113,30 +120,26 @@ int main() {
       memcpy(packet, &header, sizeof(StreamHeader));
       memcpy(packet + sizeof(StreamHeader), &omsg, sizeof(OrderMessage));
             
+
+
       sendPacket(sock, multicastGroup, port, packet, sizeof(packet));
       //logger.info("Order | Multicast Sent for Sequence No. {}", sequenceNumber);        
 
-      //time3 = getCurrentTimestampUs();
-      time3 = getCurrentMicroseconds();
-  
-      float f1, f2, f3, diff;
-      f1 = stof(time1);
-      f2 = stof(time2);
-      f3 = stof(time3);
-      diff = f3 - f2;
-      
-  
-      //std::cout<<"The Start time is "<<time2<<" and the end time is "<<time3<<std::endl;
-      std::cout<<"The difference is "<<diff<<" seconcds"<<std::endl;
+
+      //if (sequenceNumber % 100 == 0)
+      //  bench.report();
+
+
+
     } 
     else {
 
       memset(&tmsg,0,sizeof(tmsg));
 
+      memset(&header,0,sizeof(header));
       simMTBTTrd.populateTradeMessage(&tmsg, sequenceNumber); 
       //simMTBTTrd.displayTradeMessage(&tmsg); 
       
-      StreamHeader header;
       header.msgLen = sizeof(StreamHeader) + sizeof(TradeMessage);
       header.streamID = 1;
       header.sequenceNo = sequenceNumber++;
@@ -155,6 +158,7 @@ int main() {
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
   } 
 
+  bench.reset();
   close(sock); 
   return SUCCESS;
 }

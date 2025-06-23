@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/src/common.cpp" "CMakeFiles/nse_sim.dir/src/common.cpp.o" "gcc" "CMakeFiles/nse_sim.dir/src/common.cpp.o.d"
   "/home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/src/config_parser.cpp" "CMakeFiles/nse_sim.dir/src/config_parser.cpp.o" "gcc" "CMakeFiles/nse_sim.dir/src/config_parser.cpp.o.d"
+  "/home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/src/latency_benchmark.cpp" "CMakeFiles/nse_sim.dir/src/latency_benchmark.cpp.o" "gcc" "CMakeFiles/nse_sim.dir/src/latency_benchmark.cpp.o.d"
   "/home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/src/log.cpp" "CMakeFiles/nse_sim.dir/src/log.cpp.o" "gcc" "CMakeFiles/nse_sim.dir/src/log.cpp.o.d"
   "/home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/src/multicast.cpp" "CMakeFiles/nse_sim.dir/src/multicast.cpp.o" "gcc" "CMakeFiles/nse_sim.dir/src/multicast.cpp.o.d"
   "/home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/src/nse_feed_gen.cpp" "CMakeFiles/nse_sim.dir/src/nse_feed_gen.cpp.o" "gcc" "CMakeFiles/nse_sim.dir/src/nse_feed_gen.cpp.o.d"

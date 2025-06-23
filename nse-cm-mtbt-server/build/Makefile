@@ -178,6 +178,30 @@ src/config_parser.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/nse_sim.dir/build.make CMakeFiles/nse_sim.dir/src/config_parser.cpp.s
 .PHONY : src/config_parser.cpp.s
 
+src/latency_benchmark.o: src/latency_benchmark.cpp.o
+.PHONY : src/latency_benchmark.o
+
+# target to build an object file
+src/latency_benchmark.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nse_sim.dir/build.make CMakeFiles/nse_sim.dir/src/latency_benchmark.cpp.o
+.PHONY : src/latency_benchmark.cpp.o
+
+src/latency_benchmark.i: src/latency_benchmark.cpp.i
+.PHONY : src/latency_benchmark.i
+
+# target to preprocess a source file
+src/latency_benchmark.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nse_sim.dir/build.make CMakeFiles/nse_sim.dir/src/latency_benchmark.cpp.i
+.PHONY : src/latency_benchmark.cpp.i
+
+src/latency_benchmark.s: src/latency_benchmark.cpp.s
+.PHONY : src/latency_benchmark.s
+
+# target to generate assembly for a file
+src/latency_benchmark.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nse_sim.dir/build.make CMakeFiles/nse_sim.dir/src/latency_benchmark.cpp.s
+.PHONY : src/latency_benchmark.cpp.s
+
 src/log.o: src/log.cpp.o
 .PHONY : src/log.o
 
@@ -289,6 +313,9 @@ help:
 	@echo "... src/config_parser.o"
 	@echo "... src/config_parser.i"
 	@echo "... src/config_parser.s"
+	@echo "... src/latency_benchmark.o"
+	@echo "... src/latency_benchmark.i"
+	@echo "... src/latency_benchmark.s"
 	@echo "... src/log.o"
 	@echo "... src/log.i"
 	@echo "... src/log.s"

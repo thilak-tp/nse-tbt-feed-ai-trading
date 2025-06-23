@@ -7,6 +7,7 @@ file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "/home/ovrteq/learning/dev/nse
 set(OLD_GLOB
   "/home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/src/common.cpp"
   "/home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/src/config_parser.cpp"
+  "/home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/src/latency_benchmark.cpp"
   "/home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/src/log.cpp"
   "/home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/src/multicast.cpp"
   "/home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/src/nse_feed_gen.cpp"

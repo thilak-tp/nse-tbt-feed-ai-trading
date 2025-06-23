@@ -97,10 +97,24 @@ CMakeFiles/nse_sim.dir/src/config_parser.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/nse_sim.dir/src/config_parser.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/src/config_parser.cpp -o CMakeFiles/nse_sim.dir/src/config_parser.cpp.s
 
+CMakeFiles/nse_sim.dir/src/latency_benchmark.cpp.o: CMakeFiles/nse_sim.dir/flags.make
+CMakeFiles/nse_sim.dir/src/latency_benchmark.cpp.o: /home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/src/latency_benchmark.cpp
+CMakeFiles/nse_sim.dir/src/latency_benchmark.cpp.o: CMakeFiles/nse_sim.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/nse_sim.dir/src/latency_benchmark.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/nse_sim.dir/src/latency_benchmark.cpp.o -MF CMakeFiles/nse_sim.dir/src/latency_benchmark.cpp.o.d -o CMakeFiles/nse_sim.dir/src/latency_benchmark.cpp.o -c /home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/src/latency_benchmark.cpp
+
+CMakeFiles/nse_sim.dir/src/latency_benchmark.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/nse_sim.dir/src/latency_benchmark.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/src/latency_benchmark.cpp > CMakeFiles/nse_sim.dir/src/latency_benchmark.cpp.i
+
+CMakeFiles/nse_sim.dir/src/latency_benchmark.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/nse_sim.dir/src/latency_benchmark.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/src/latency_benchmark.cpp -o CMakeFiles/nse_sim.dir/src/latency_benchmark.cpp.s
+
 CMakeFiles/nse_sim.dir/src/log.cpp.o: CMakeFiles/nse_sim.dir/flags.make
 CMakeFiles/nse_sim.dir/src/log.cpp.o: /home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/src/log.cpp
 CMakeFiles/nse_sim.dir/src/log.cpp.o: CMakeFiles/nse_sim.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/nse_sim.dir/src/log.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/nse_sim.dir/src/log.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/nse_sim.dir/src/log.cpp.o -MF CMakeFiles/nse_sim.dir/src/log.cpp.o.d -o CMakeFiles/nse_sim.dir/src/log.cpp.o -c /home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/src/log.cpp
 
 CMakeFiles/nse_sim.dir/src/log.cpp.i: cmake_force
@@ -114,7 +128,7 @@ CMakeFiles/nse_sim.dir/src/log.cpp.s: cmake_force
 CMakeFiles/nse_sim.dir/src/multicast.cpp.o: CMakeFiles/nse_sim.dir/flags.make
 CMakeFiles/nse_sim.dir/src/multicast.cpp.o: /home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/src/multicast.cpp
 CMakeFiles/nse_sim.dir/src/multicast.cpp.o: CMakeFiles/nse_sim.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/nse_sim.dir/src/multicast.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/nse_sim.dir/src/multicast.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/nse_sim.dir/src/multicast.cpp.o -MF CMakeFiles/nse_sim.dir/src/multicast.cpp.o.d -o CMakeFiles/nse_sim.dir/src/multicast.cpp.o -c /home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/src/multicast.cpp
 
 CMakeFiles/nse_sim.dir/src/multicast.cpp.i: cmake_force
@@ -128,7 +142,7 @@ CMakeFiles/nse_sim.dir/src/multicast.cpp.s: cmake_force
 CMakeFiles/nse_sim.dir/src/nse_feed_gen.cpp.o: CMakeFiles/nse_sim.dir/flags.make
 CMakeFiles/nse_sim.dir/src/nse_feed_gen.cpp.o: /home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/src/nse_feed_gen.cpp
 CMakeFiles/nse_sim.dir/src/nse_feed_gen.cpp.o: CMakeFiles/nse_sim.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/nse_sim.dir/src/nse_feed_gen.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/nse_sim.dir/src/nse_feed_gen.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/nse_sim.dir/src/nse_feed_gen.cpp.o -MF CMakeFiles/nse_sim.dir/src/nse_feed_gen.cpp.o.d -o CMakeFiles/nse_sim.dir/src/nse_feed_gen.cpp.o -c /home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/src/nse_feed_gen.cpp
 
 CMakeFiles/nse_sim.dir/src/nse_feed_gen.cpp.i: cmake_force
@@ -142,7 +156,7 @@ CMakeFiles/nse_sim.dir/src/nse_feed_gen.cpp.s: cmake_force
 CMakeFiles/nse_sim.dir/src/simulate_mtbt_values.cpp.o: CMakeFiles/nse_sim.dir/flags.make
 CMakeFiles/nse_sim.dir/src/simulate_mtbt_values.cpp.o: /home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/src/simulate_mtbt_values.cpp
 CMakeFiles/nse_sim.dir/src/simulate_mtbt_values.cpp.o: CMakeFiles/nse_sim.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/nse_sim.dir/src/simulate_mtbt_values.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/nse_sim.dir/src/simulate_mtbt_values.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/nse_sim.dir/src/simulate_mtbt_values.cpp.o -MF CMakeFiles/nse_sim.dir/src/simulate_mtbt_values.cpp.o.d -o CMakeFiles/nse_sim.dir/src/simulate_mtbt_values.cpp.o -c /home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/src/simulate_mtbt_values.cpp
 
 CMakeFiles/nse_sim.dir/src/simulate_mtbt_values.cpp.i: cmake_force
@@ -157,6 +171,7 @@ CMakeFiles/nse_sim.dir/src/simulate_mtbt_values.cpp.s: cmake_force
 nse_sim_OBJECTS = \
 "CMakeFiles/nse_sim.dir/src/common.cpp.o" \
 "CMakeFiles/nse_sim.dir/src/config_parser.cpp.o" \
+"CMakeFiles/nse_sim.dir/src/latency_benchmark.cpp.o" \
 "CMakeFiles/nse_sim.dir/src/log.cpp.o" \
 "CMakeFiles/nse_sim.dir/src/multicast.cpp.o" \
 "CMakeFiles/nse_sim.dir/src/nse_feed_gen.cpp.o" \
@@ -167,13 +182,14 @@ nse_sim_EXTERNAL_OBJECTS =
 
 /home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/bin/nse_sim: CMakeFiles/nse_sim.dir/src/common.cpp.o
 /home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/bin/nse_sim: CMakeFiles/nse_sim.dir/src/config_parser.cpp.o
+/home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/bin/nse_sim: CMakeFiles/nse_sim.dir/src/latency_benchmark.cpp.o
 /home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/bin/nse_sim: CMakeFiles/nse_sim.dir/src/log.cpp.o
 /home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/bin/nse_sim: CMakeFiles/nse_sim.dir/src/multicast.cpp.o
 /home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/bin/nse_sim: CMakeFiles/nse_sim.dir/src/nse_feed_gen.cpp.o
 /home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/bin/nse_sim: CMakeFiles/nse_sim.dir/src/simulate_mtbt_values.cpp.o
 /home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/bin/nse_sim: CMakeFiles/nse_sim.dir/build.make
 /home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/bin/nse_sim: CMakeFiles/nse_sim.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable /home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/bin/nse_sim"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable /home/ovrteq/learning/dev/nse-cm-mtbt-sim/nse-tbt-feed-ai-trading/nse-cm-mtbt-server/bin/nse_sim"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/nse_sim.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
